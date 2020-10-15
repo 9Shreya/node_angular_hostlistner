@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Component} from '@angular/core';
+import {DataService} from './service/data.service';
 
 @Component({
   selector: 'app-root',
@@ -24,11 +25,28 @@ export class AppComponent {
     this.startIndex = pageIndex * 10;
     this.endIndex = this.startIndex + 10;
   }
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private _dataService: DataService) {
     this.http.get(this.urll).subscribe((res) => {
       this.data = res;
       console.log(this.data.length);
       this.totalRecords = this.data.length;
     });
+    this._dataService.getUsers()
+      .subscribe(res => {
+        this.users = res
+        this.dataa = this.users.data
+        console.log('hi');
+
+        console.log(this.users);
+      })
   }
+
+  dataa
+  users
+  delet(obj) {
+    this._dataService.delete(obj).subscribe((posts) => {
+      console.log(posts);
+    })
+  }
+
 }

@@ -1,6 +1,8 @@
-<div class="container" style="margin-top: 50px;">
-  <div *ngFor="let d of data | slice: startIndex:endIndex">
-    <div class="col-md-12" style="text-align: center; display: block;">
+<div class="container">
+<div appDirect>
+<div  class="container" style="margin-top: 50px; text-align: center;">
+  <div  *ngFor="let d of data | slice: startIndex:endIndex" >
+    <div id={{d.id}}  class="col-md-12" style="text-align: center; display: block;" id={{d.id}}>
       <p style="font-size: 15px; font-weight: bolder;">
         <img src="{{ d.thumbnailUrl }}" alt="" />
       </p>
@@ -18,21 +20,28 @@
   </div>
   <nav aria-label="Page navigation example">
     <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
+     
       <li *ngFor="let item of getArray(data); let in = index" class="page-item">
-        <a class="page-link" (click)="updateIndex(in)" href="#">{{ in + 1 }}</a>
+        <a id={{in}} class="page-link" (click)="updateIndex(in)" href="#">{{ in + 1 }}</a>
       </li>
 
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
+     
     </ul>
   </nav>
+</div>
+
+
+<!-- <a routerLink=" ">Home</a> -->
+<router-outlet></router-outlet>
+<a routerLink="cost">customers</a></div>
+<div *ngFor="let d of dataa">
+    {{d._id}}<br>
+    {{d.id}}<br>
+    {{d.name}}<br>
+     {{d.email}}<br>
+    {{d.file}}<br>
+    <button class="btn btn-danger" (click)="delet(d)">delete</button>
+
+
+</div>
 </div>
